@@ -1,0 +1,62 @@
+<!-- templates/signup.html -->
+
+{% extends "base.html" %}
+{% block content %}
+<div class="h3 mb-4 row">
+        <h1 class="h3 mb-2 text-gray-800 col-sm-8"  >{{title}}</h1>
+        <div class="col-sm-4">
+            <button type="submit" form="form" class=" btn ml-2 btn-sm btn-primary float-right" ><i class="fas fa-folder fa-sm text-white-50"></i> Save</button>           
+            <a href="{{ url_for('user.user_list')}}" class=" btn ml-2 btn-sm btn-primary float-right"><i class="fas fa-users fa-sm text-white-50"></i> User List</a>        
+        </div>
+</div>
+<div class="column is-4 is-offset-4">
+    <div class="box">
+        <form   id="form" method="POST"   action="{{url_for('user.user_save')}}">
+            {% if user.id %}
+                <input hidden type="number" name="id"  value="{{user.id}}">
+            {% endif %}
+            
+            <div class="row">
+                    <div class="form-group col-6">
+                            <label for="first_name">First Name</label>
+                            <input type="text"  value="{{user.first_name}}"  required class="form-control" id="first_name" name="first_name" aria-describedby="emailHelp" placeholder="First Name">
+                        </div>
+                        <div class="form-group col-6">
+                                <label for="name">Last Name</label>
+                            <input type="text"   required value="{{user.last_name}}"  class="form-control" id="last_name" name="last_name" aria-describedby="emailHelp" placeholder="Last Name">
+                        </div>
+            </div>
+            
+            
+
+            <div class="form-group">
+                    <label for="email">User Email</label>
+                    <input type="text" required value="{{user.email}}" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter User Email">
+            </div>
+
+            {% if not user.id %}
+            <div class="row">
+                    <div class="form-group col-6">
+                               <label for="password">Password</label>
+                               <input type="password"  required class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group col-6">
+                           <label for="confirm_password">Confirm Password</label>
+                           <input type="password"   class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
+                    </div>
+             </div>
+            {% endif %}
+             
+            
+            
+             <div class="form-check">
+             <input type="checkbox" value="{{user.is_admin}}" class="form-check-input" id="is_admin" class="is_admin">
+             <label class="form-check-label" for="exampleCheck1">Is Admin</label>
+            </div>
+
+
+            
+        </form>
+    </div>
+</div>
+{% endblock %}
